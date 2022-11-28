@@ -10,7 +10,7 @@
  * @param {number} n
  * @returns {number}
  */
-const getFactorial = (n) => (n == 1 ? 1 : n * factorial(n - 1));
+const getFactorial = (n) => (n === 1) ? 1 : n * getFactorial(n - 1);
 
 /**
  * check the data from the user
@@ -46,3 +46,5 @@ try {
 
 console.log("************");
 console.log("************");
+
+
