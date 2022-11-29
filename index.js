@@ -7,33 +7,29 @@
 
 /**
  * calculates the factorial of a number
- * @param {number} n
- * @returns {number}
+ * @param {number | bigint} num
+ * @returns {number | bigint}
+ * @throws {TypeError} type must be a number or bigint for num
+ * @throws {RangeError} type must be a positive num or zero
  */
-const getFactorial = (n) => (n === 1) ? 1 : n * getFactorial(n - 1);
-
-/**
- * check the data from the user
- * @param {number} n
- * @returns {number}
- * @throws {TypeError} type must be a number or bigint for n
- * @throws {RangeError} type must be a positive n or zero
- */
-const checkDataFactorial = function (n) {
-  if (typeof n !== "number" && typeof n !== "bigint") {
+const getFactorial = function (num) {
+  if (typeof num !== "number" && typeof num !== "bigint") {
     throw new TypeError("Type is not number!");
   }
-  if (n < 0) {
+  if (num < 0) {
     throw new RangeError("Number must be positive!");
   }
-  if (n === 0) {
-    return typeof n === "bigint" ? 1n : 1;
+  if (num === 0) {
+    return 1;
   }
-  return getFactorial(n);
+  if (typeof num === "bigint") {
+    return BigInt(Number(num) * getFactorial(Number(num) - 1));
+  }
+  return num * getFactorial(num - 1);
 };
 
 try {
-  console.log(checkDataFactorial(5));
+  console.log(getFactorial(2n));
 } catch (error) {
   if (error instanceof TypeError) {
     console.log("Wrong type");
@@ -46,5 +42,3 @@ try {
 
 console.log("************");
 console.log("************");
-
-
