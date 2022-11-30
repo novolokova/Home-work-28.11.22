@@ -29,7 +29,7 @@ const getFactorial = function (num) {
 };
 
 try {
-  console.log(getFactorial(2n));
+  console.log(getFactorial(7n));
 } catch (error) {
   if (error instanceof TypeError) {
     console.log("Wrong type");
@@ -42,3 +42,19 @@ try {
 
 console.log("************");
 console.log("************");
+
+// !!!!!!!
+const getFactorial1 = function (num) {
+  if (typeof num !== "number" && typeof num !== "bigint") {
+    throw new TypeError("Type is not number!");
+  }
+  if (num < 0 || num < 0n) {
+    throw new RangeError("Number must be positive!");
+  }
+  if (num === 0  || num === 0n) {
+    return typeof num === "bigint"? 1n : 1;
+  }
+    
+  return num * getFactorial(num - (typeof num === "bigint"? 1n : 1));
+};
+// або так - тобто скрізь врахувати цей тип данних
